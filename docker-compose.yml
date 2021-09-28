@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: dropull-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - 9229:9229
+    entrypoint: ./.docker/entrypoint.sh
+    env_file:
+      - .env
+    networks:
+      - default
+    depends_on:
+      - db
+  db:
+    image: postgres
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=dropull
+    volumes:
+      - .docker/db/data:/var/lib/postgresql/data
+    networks:
+      - default
+networks:
+  default:
+    driver: bridge

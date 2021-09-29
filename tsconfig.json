@@ -1,4 +1,7 @@
 {
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -10,6 +13,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+
   }
 }

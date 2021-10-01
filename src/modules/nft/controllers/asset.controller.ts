@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   UploadedFiles,
   UseGuards,
@@ -12,11 +13,16 @@ import { CreateAssetDto } from '../dtos/create-asset.dto';
 import { createAssetFileInterceptor } from '../helpers/create-asset-file.interceptor';
 import { AssetService } from '../services/asset.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller('asset')
 export class AssetController {
   constructor(private readonly assetService: AssetService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @Get()
+  async index() {
+    return this.assetService.findAll();
+  }
+
   @Post()
   @UseInterceptors(createAssetFileInterceptor())
   async create(

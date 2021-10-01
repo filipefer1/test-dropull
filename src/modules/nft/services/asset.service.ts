@@ -1,11 +1,16 @@
-import { BadRequestException, HttpService, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpService,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import * as FormData from 'form-data';
 import { CreateAssetDto } from '../dtos/create-asset.dto';
 import * as path from 'path';
 import { config } from '../../../config/configuration';
 import { IpfsResponseDto } from '../dtos/ipfs-response.dto';
-import { catchError, lastValueFrom, map } from 'rxjs';
+import { catchError, lastValueFrom, map, NotFoundError } from 'rxjs';
 import { AssetRepository } from '../repositories/asset.repository';
 
 @Injectable()
@@ -15,11 +20,27 @@ export class AssetService {
     private readonly httpService: HttpService,
   ) {}
 
+  async findAll() {
+    return this.assetRepository.find();
+  }
+
+  async findByHash(hash: string) {
+    const asset = await this.assetRepository.findOne({
+      where: { ipfsHash: hash },
+    });
+
+    if (!asset) {
+      throw new NotFoundException('Asset not found');
+    }
+
+    return asset;
+  }
+
   async create(dto: CreateAssetDto) {
     const ipfs = await lastValueFrom(await this.createIpfs(dto));
 
     if (ipfs.isDuplicate) {
-      return;
+      return this.findByHash(ipfs.IpfsHash);
     }
 
     const asset = this.assetRepository.create({

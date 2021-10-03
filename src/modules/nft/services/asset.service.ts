@@ -10,7 +10,7 @@ import { CreateAssetDto } from '../dtos/create-asset.dto';
 import * as path from 'path';
 import { config } from '../../../config/configuration';
 import { IpfsResponseDto } from '../dtos/ipfs-response.dto';
-import { catchError, lastValueFrom, map, NotFoundError } from 'rxjs';
+import { catchError, lastValueFrom, map } from 'rxjs';
 import { AssetRepository } from '../repositories/asset.repository';
 
 @Injectable()
@@ -27,6 +27,18 @@ export class AssetService {
   async findByHash(hash: string) {
     const asset = await this.assetRepository.findOne({
       where: { ipfsHash: hash },
+    });
+
+    if (!asset) {
+      throw new NotFoundException('Asset not found');
+    }
+
+    return asset;
+  }
+
+  async findById(id: string) {
+    const asset = await this.assetRepository.findOne({
+      where: { id },
     });
 
     if (!asset) {

@@ -49,7 +49,7 @@ export class AssetService {
   }
 
   async create(dto: CreateAssetDto) {
-    const ipfs = await lastValueFrom(await this.createIpfs(dto));
+    const ipfs = await this.formatIpfsResponse(dto);
 
     if (ipfs.isDuplicate) {
       return this.findByHash(ipfs.IpfsHash);
@@ -66,7 +66,7 @@ export class AssetService {
     return this.assetRepository.save(asset);
   }
 
-  private async createIpfs(dto: CreateAssetDto) {
+  async createIpfs(dto: CreateAssetDto) {
     const url = config.PINATA.url;
 
     const form = new FormData();
@@ -92,6 +92,10 @@ export class AssetService {
       );
 
     return response;
+  }
+
+  async formatIpfsResponse(dto: CreateAssetDto) {
+    return lastValueFrom(await this.createIpfs(dto));
   }
 
   private formatFilePath(asset: string) {

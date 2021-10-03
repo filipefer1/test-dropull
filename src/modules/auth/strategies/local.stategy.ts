@@ -1,12 +1,7 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import * as Express from 'express';
 import { Strategy } from 'passport-local';
-// import { errorMessages } from '../../../shared/constants/error-messages';
 import { AuthService } from '../auth.service';
 import { LoginRequestDto } from '../dto/login-request.dto';
 
@@ -21,7 +16,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     const user = await this.authService.validateUser(username, password);
 
     if (!user) {
-      throw new UnauthorizedException('errorMessages.AUTH.INVALID_CREDENTIALS');
+      throw new UnauthorizedException('User unauthorized');
     }
 
     return user;

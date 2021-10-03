@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { CreateAssetDto } from '../dtos/create-asset.dto';
+import { Asset } from '../entities/asset.entity';
 import { createAssetFileInterceptor } from '../helpers/create-asset-file.interceptor';
 import { AssetService } from '../services/asset.service';
 
@@ -19,7 +20,7 @@ export class AssetController {
   constructor(private readonly assetService: AssetService) {}
 
   @Get()
-  async index() {
+  async index(): Promise<Asset[]> {
     return this.assetService.findAll();
   }
 
@@ -28,7 +29,7 @@ export class AssetController {
   async create(
     @UploadedFiles() uploadedFiles: Express.Multer.File,
     @Body(ValidationPipe) dto: CreateAssetDto,
-  ) {
+  ): Promise<Asset> {
     const asset = uploadedFiles['asset'][0];
     return this.assetService.create({ ...dto, asset: asset.path });
   }

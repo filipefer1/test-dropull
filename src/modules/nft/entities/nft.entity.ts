@@ -1,4 +1,4 @@
-import { AfterInsert, BeforeInsert, Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { EntityBase } from '../../../shared/entity-base';
 import { Asset } from './asset.entity';
 

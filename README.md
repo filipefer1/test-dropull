@@ -29,7 +29,6 @@ git clone https://github.com/filipefer1/test-dropull.git
 yarn
 ```
 
-
 - Inicialize a aplicação
 
 ```bash
@@ -45,55 +44,58 @@ yarn test:watch
 #### Endpoints
 
 ##### - User
+
 ```
-POST - /user
+POST - http://localhost:3333/user
 ```
+
 ```json
 {
-	"nickname": "nickname",
-	"email": "email@email.com",
-	"password": "some-password"
+  "nickname": "nickname",
+  "email": "email@email.com",
+  "password": "some-password"
 }
 ```
+
 ##### - Auth
 
 ```
-POST - /auth/login
+POST - http://localhost:3333/auth/login
 ```
+
 ```json
 {
-
-	"username": "nickname",
-	"password": "some-password"
-
+  "username": "nickname",
+  "password": "some-password"
 }
 ```
 
 ##### - Asset
 
 ```
-GET - /asset
+GET - http://localhost:3333/asset
 ```
 
 ```
-POST - /asset
+POST - http://localhost:3333/asset
 ```
+
 Esse endpoint utiliza multpart/form, então você pode fazer um upload de uma imagem.
+
 ```
 asset: File;
 name: string;
 description: string;
 ```
 
-
 ##### - Nft
 
 ```
-GET - /nft
+GET - http://localhost:3333/nft
 ```
 
 ```
-POST - /nft
+POST - http://localhost:3333/nft
 ```
 
 ```json

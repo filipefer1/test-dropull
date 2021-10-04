@@ -20,7 +20,7 @@ O desafio conssistia na criação de uma api que pudesse cadastrar e exibir asse
 - Faça um clone do repositório
 
 ```bash
-git clone https://github.com/filipefer1/test-dropull
+git clone https://github.com/filipefer1/test-dropull.git
 ```
 
 - Instale as dependências

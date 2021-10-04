@@ -13,7 +13,7 @@ Repositório para o desafio da Dropull.
 
 ### Desafios/Problemas
 
-O desafio conssistia na criação de uma api que pudesse cadastrar e exibir assets e cadastrar um nft vinculado com um asset, além de listar todos os nfts.
+O desafio consistia na criação de uma api que pudesse cadastrar e exibir assets e cadastrar um nft vinculado com um asset, além de listar todos os nfts.
 
 ### Setup
 

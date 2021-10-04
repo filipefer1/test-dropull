@@ -17,45 +17,86 @@ O desafio conssistia na criação de uma api que pudesse cadastrar e exibir asse
 
 ### Setup
 
-```
 - Faça um clone do repositório
-```
 
+```bash
 git clone https://github.com/filipefer1/test-dropull
-
 ```
+
 - Instale as dependências
 
-```
-
+```bash
 yarn
-
 ```
+
+
 - Inicialize a aplicação
 
-```
-
+```bash
 docker-compose up
-
 ```
 
 - Execute os testes
-```
 
+```bash
 yarn test:watch
-
 ```
 
 #### Endpoints
 
 ##### - User
 ```
+POST - /user
+```
+```json
+{
+	"nickname": "nickname",
+	"email": "email@email.com",
+	"password": "some-password"
+}
+```
+##### - Auth
 
 ```
-##### - Produto
+POST - /auth/login
+```
+```json
+{
 
+	"username": "nickname",
+	"password": "some-password"
+
+}
+```
+
+##### - Asset
+
+```
+GET - /asset
 ```
 
 ```
+POST - /asset
+```
+Esse endpoint utiliza multpart/form, então você pode fazer um upload de uma imagem.
+```
+asset: File;
+name: string;
+description: string;
+```
 
+
+##### - Nft
+
+```
+GET - /nft
+```
+
+```
+POST - /nft
+```
+
+```json
+"assetId": "asset-id",
+"quantity": 2
 ```

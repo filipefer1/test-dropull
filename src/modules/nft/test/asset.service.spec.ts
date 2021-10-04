@@ -7,6 +7,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateAssetDto } from '../dtos/create-asset.dto';
 import { AssetRepository } from '../repositories/asset.repository';
 import { AssetService } from '../services/asset.service';
+import { AssetMock } from './mocks/asset.mock';
 
 const mockAssetRepository = () => ({
   find: jest.fn(),
@@ -55,43 +56,30 @@ describe('AssetService', () => {
     let mockCreateAsset: CreateAssetDto;
 
     beforeEach(() => {
-      mockCreateAsset = {
-        name: 'mockAssetName',
-        asset: 'mockAssetDestination',
-        description: 'mockAssestDescription',
-      };
+      mockCreateAsset = AssetMock.createAsset();
     });
 
     it('should create a asset', async () => {
-      assetRepository.create.mockResolvedValue();
-      assetRepository.save.mockResolvedValue({
+      const response = {
         id: 'mockId',
         ipfsHash: 'mockIpfsHash',
         name: mockCreateAsset.name,
         description: mockCreateAsset.description,
-      });
-      service.createIpfs = jest.fn().mockReturnValue({
-        IpfsHash: 'mockIpfsHash',
-        PinSize: 'mockPinSize',
-        Timestamp: 'mockTimestamp',
-      });
+      };
 
-      service.formatIpfsResponse = jest.fn().mockReturnValue({
-        IpfsHash: 'mockIpfsHash',
-        PinSize: 'mockPinSize',
-        Timestamp: 'mockTimestamp',
-      });
+      assetRepository.create.mockResolvedValue();
+      assetRepository.save.mockResolvedValue(response);
+      service.createIpfs = jest.fn().mockReturnValue(AssetMock.getIpfsReturn());
+
+      service.formatIpfsResponse = jest
+        .fn()
+        .mockReturnValue(AssetMock.getIpfsReturn());
 
       const asset = await service.create(mockCreateAsset);
 
       expect(assetRepository.create).toHaveBeenCalled();
       expect(assetRepository.save).toHaveBeenCalled();
-      expect(asset).toEqual({
-        id: 'mockId',
-        ipfsHash: 'mockIpfsHash',
-        name: mockCreateAsset.name,
-        description: mockCreateAsset.description,
-      });
+      expect(asset).toEqual(response);
     });
 
     it('should throw an error if name is not provided', async () => {

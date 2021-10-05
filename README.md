@@ -35,10 +35,21 @@ yarn
 docker-compose up
 ```
 
+- Rode as migrations
+  Abra um novo terminal e entre na bash do container.
+  ```bash
+    docker-compose exec main bash
+  ```
+  
+ Execute
+ ```bash
+  yarn mr
+ ```
+
 - Execute os testes
 
 ```bash
-yarn test:watch
+yarn test
 ```
 
 #### Endpoints
@@ -58,6 +69,8 @@ POST - http://localhost:3333/user
 ```
 
 ##### - Auth
+
+Os próximos endpoints precisam do Bearer token gerado no endpoint de login.
 
 ```
 POST - http://localhost:3333/auth/login
@@ -99,6 +112,8 @@ POST - http://localhost:3333/nft
 ```
 
 ```json
-"assetId": "asset-id",
-"quantity": 2
+{
+  "assetId": "asset-id",
+  "quantity": 2
+}
 ```

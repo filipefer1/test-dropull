@@ -37,15 +37,15 @@ export class AssetService {
   }
 
   async findById(id: string) {
-    const asset = await this.assetRepository.findOne({
-      where: { id },
-    });
+    try {
+      const asset = await this.assetRepository.findOne({
+        where: { id },
+      });
 
-    if (!asset) {
+      return asset;
+    } catch (error) {
       throw new NotFoundException('Asset not found');
     }
-
-    return asset;
   }
 
   async create(dto: CreateAssetDto) {

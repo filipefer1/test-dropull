@@ -42,6 +42,10 @@ export class AssetService {
         where: { id },
       });
 
+      if (!asset) {
+        throw new NotFoundException();
+      }
+
       return asset;
     } catch (error) {
       throw new NotFoundException('Asset not found');

@@ -63,6 +63,8 @@ yarn test
 
 #### Endpoints
 
+https://documenter.getpostman.com/view/17530680/UUy65Pko
+
 ##### - User
 
 ```

@@ -15,6 +15,15 @@ Repositório para o desafio da Dropull.
 
 O desafio consistia na criação de uma api que pudesse cadastrar e exibir assets e cadastrar um nft vinculado com um asset, além de listar todos os nfts.
 
+### Features
+
+- [x] Cadastro de usuário
+- [x] Login
+- [x] Cadastro de assets
+- [x] Listagem de assets
+- [x] Cadastro de nfts
+- [x] Listagem de nfts
+
 ### Setup
 
 - Faça um clone do repositório
@@ -36,15 +45,15 @@ docker-compose up
 ```
 
 - Rode as migrations
-  Abra um novo terminal e entre na bash do container.
+
   ```bash
-    docker-compose exec main bash
+  #   Abra um novo terminal e entre na bash do container.
+      docker-compose exec main bash
+      
+  #  Execute
+       yarn mr
   ```
-  
- Execute
- ```bash
-  yarn mr
- ```
+ 
 
 - Execute os testes
 

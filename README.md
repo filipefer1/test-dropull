@@ -93,7 +93,7 @@ GET - http://localhost:3333/asset
 POST - http://localhost:3333/asset
 ```
 
-Esse endpoint utiliza multpart/form, então você pode fazer um upload de uma imagem.
+Esse endpoint utiliza multipart/form, então você pode fazer um upload de uma imagem.
 
 ```
 asset: File;
